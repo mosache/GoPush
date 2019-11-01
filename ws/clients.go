@@ -16,17 +16,17 @@ var (
 )
 
 //添加连接
-func (cs clientSlice) addConn(id string, c *websocket.Conn) *client {
+func (cs *clientSlice) addConn(id string, c *websocket.Conn) *client {
 	client := &client{
 		id:      id,
 		conn:    c,
 		msgChan: make(chan string),
 	}
-	cs = append(cs, client)
+	*cs = append(*cs, client)
 
 	return client
 }
 
-func (cs clientSlice) get(index int) *client {
-	return cs[0]
+func (cs *clientSlice) get(index int) *client {
+	return (*cs)[0]
 }

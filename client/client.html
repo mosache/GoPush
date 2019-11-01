@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   
+</head>
+<body>
+    <div id="result"></div>
+    <script>
+        window.onload = () => {
+            var ws = new WebSocket("ws://localhost:8080/ws")
+            ws.onopen = (evt) => {
+                console.log("open success")
+            }
+
+            ws.onerror = (err) => {
+                document.querySelector("#result").innerHTML = err
+            }
+
+            ws.onmessage = (msg) => {
+                console.log(msg)
+                document.querySelector("#result").innerHTML = msg.data
+            }
+        }
+    </script>
+</body>
+</html>
+
